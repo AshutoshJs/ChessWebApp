@@ -1,0 +1,33 @@
+
+
+.body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chessboard{
+    border: 2px solid black;
+    display: flex;
+    width: 80%;
+    height: 640px;
+    flex-wrap: wrap;
+
+}
+.chessboard div{
+    width: 10%;//bcz widht is 80 =>80/10=8
+    height: 80px;//bcz 560/70 is 8
+    width: calc(100%/8);
+    height: calc(560/70);
+    align-items: center;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 5px 1px white;
+}
+.a{
+ //width: ;
+ background-color: rgb(182, 236, 203);
+}
+.b{
+background-color: rgb(12, 142, 62);
+}
