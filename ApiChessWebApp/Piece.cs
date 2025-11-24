@@ -7,8 +7,11 @@
     }
     public class Piece
     {
-        public Colors Color { get; set; } =  Colors.Black;
-        public int[,] Cordinates { get; set; }
+        public int x {  get; set; }
+        public int y { get; set; }
+        public PieceType types { get; set; }  
+        //public Colors Color { get; set; } //=  Colors.Black;
+        //public int[,] Cordinates { get; set; }
 
 
     }

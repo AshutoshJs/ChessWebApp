@@ -1,6 +1,7 @@
 ﻿namespace ApiChessWebApp.PiecesTypes
 {
-    public class Bishop
+    public class Bishop : Piece
     {
+
     }
 }
