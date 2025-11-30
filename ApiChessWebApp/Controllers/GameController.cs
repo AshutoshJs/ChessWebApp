@@ -47,7 +47,7 @@ namespace ApiChessWebApp.Controllers
              */
 
 
-             return StatusCode(200, board);
+            return Ok(board);
         }
     }
 }
