@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace ApiChessWebApp.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    // [Route("[controller]")]
+    [Route("api/[controller]/[action]")]
     public class GameController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -31,9 +32,9 @@ namespace ApiChessWebApp.Controllers
         }
 
         [HttpGet(Name = "InitalizeGame")]
-        public IEnumerable<WeatherForecast> InitalizeGame()
+        public IActionResult InitalizeGame()//public IEnumerable<Board> InitalizeGame()
         {
-
+            Board board = new Board("ee");
             /*
             Question:yai kya return karega FE ko?
             Answer:inital cordinates of every piece ek calss chiyye jo usko reperesent kare
@@ -46,7 +47,7 @@ namespace ApiChessWebApp.Controllers
              */
 
 
-            return null;
+            return Ok(board);
         }
     }
 }
