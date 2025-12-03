@@ -23,36 +23,60 @@ namespace ApiChessWebApp
                 this.Pieces.Add(new List<Piece?>(8));
                 for (int j = 0; j < 8; j++)
                 {
-                    this.Pieces[i].Add(new Piece(i,j));
+                    char z=GetCordinateChar(j);
+
+                    this.Pieces[i].Add(new Piece(i, j, z));
                 }
 
             }
            
 
-            Pieces[0][0] = new Rook(0,0);
-            Pieces[0][1] = new Knight(0,1);
-            Pieces[0][2] = new Bishop(0,2);
-            Pieces[0][3] = new Queen(0,3);
-            Pieces[0][4] = new King(0,4);
-            Pieces[0][5] = new Bishop(0,5);
-            Pieces[0][6] = new Knight(0,6);
-            Pieces[0][7] = new Rook(0,7);
+            Pieces[0][0] = new Rook(0,0,'a');
+            Pieces[0][1] = new Knight(0,1,'b');
+            Pieces[0][2] = new Bishop(0,2,'c');
+            Pieces[0][3] = new Queen(0,3,'d');
+            Pieces[0][4] = new King(0,4,'e');
+            Pieces[0][5] = new Bishop(0,5,'f');
+            Pieces[0][6] = new Knight(0,6,'g');
+            Pieces[0][7] = new Rook(0,7,'h');
             for (int i = 0; i <= 7; i++)
             {
-                Pieces[1][i] = new Pawn(1,i);
-                Pieces[6][i] = new Pawn(6,i);
+                char z = GetCordinateChar(i);
+                Pieces[1][i] = new Pawn(1,i,z);
+                Pieces[6][i] = new Pawn(6,i,z);
             }
-            Pieces[7][0] = new Rook(7, 0);
-            Pieces[7][1] = new Knight(7,1);
-            Pieces[7][2] = new Bishop(7,2);
-            Pieces[7][3] = new Queen(7,3);
-            Pieces[7][4] = new King(7,4);
-            Pieces[7][5] = new Bishop(7,5);
-            Pieces[7][6] = new Knight(7,6);
-            Pieces[7][7] = new Rook(7,7);
+            Pieces[7][0] = new Rook(7, 0,'a');
+            Pieces[7][1] = new Knight(7,1,'b');
+            Pieces[7][2] = new Bishop(7,2,'c');
+            Pieces[7][3] = new Queen(7,3,'d');
+            Pieces[7][4] = new King(7,4,'e');
+            Pieces[7][5] = new Bishop(7,5,'f');
+            Pieces[7][6] = new Knight(7,6,'g');
+            Pieces[7][7] = new Rook(7,7,'h');
         }
 
-        
+        public static char GetCordinateChar(int i)
+        {
+            char a = ' ';
+            if (i == 0)
+                a = 'a';
+            else if (i == 1)
+                a = 'b';
+            else if (i == 2)
+                a = 'c';
+            else if (i == 3)
+                a = 'd';
+            else if (i == 4)
+                a = 'e';
+            else if (i == 5)
+                a = 'f';
+            else if (i == 6)
+                a = 'g';
+            else if (i == 7)
+                a = 'h';
+
+            return a;
+        }
     }
 }
 /*

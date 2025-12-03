@@ -14,6 +14,7 @@ namespace ApiChessWebApp.Pieces
        
         public Rook() {}
         public Rook(int x, int y) : base(x, y) { }
+        public Rook(int x, int y, char z) : base(x, y,z) { }
         /*
         public override PieceType Type => PieceType.Rook;
 

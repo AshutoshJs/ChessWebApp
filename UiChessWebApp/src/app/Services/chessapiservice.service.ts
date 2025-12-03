@@ -12,7 +12,6 @@ constructor(public http: HttpClient) { }
 
 
 public getData(): Observable<string> {
-var items;
 return this.http.get<any>(this.baseUrl);
 // return this.http.get<any>(this.baseUrl).subscribe(data => {console.log("dataFromService",data);
 //     return data} );

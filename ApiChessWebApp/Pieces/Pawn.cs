@@ -13,9 +13,10 @@ namespace ChessLogic
     {
         public override PieceType Type => PieceType.Pawn;
         public override string TypeOfPiece => PieceType.Pawn.ToString();
-        public override string HtmlCode { get; set; } = PiecesHtmlCodesHelper.GetHtmlCodes(PieceType.Pawn);
+        public override string HtmlCode { get; set; } = "&#9817";//PiecesHtmlCodesHelper.GetHtmlCodes(PieceType.Pawn);
         public Pawn() { }
         public Pawn(int x, int y) : base(x, y) { }
+        public Pawn(int x, int y, char z) : base(x, y, z) { }
         //override Piecetype property
         /*
         public override PieceType Type //New way:::public override PieceType Type => PieceType.Pawn;

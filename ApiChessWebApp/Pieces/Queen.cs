@@ -11,13 +11,14 @@ namespace ChessLogic
     {
         public override PieceType Type => PieceType.Queen;
         public override string TypeOfPiece => PieceType.Queen.ToString();
-        public override string HtmlCode { get; set; } = PiecesHtmlCodesHelper.GetHtmlCodes(PieceType.Queen);
+        public override string HtmlCode { get; set; } = "&#9813";// PiecesHtmlCodesHelper.GetHtmlCodes(PieceType.Queen);
       
         public Queen()
         {
             
         }
         public Queen(int x, int y) : base(x, y) { }
+        public Queen(int x, int y, char z) : base(x, y, z) { }
         /*
         public override PieceType Type => PieceType.Queen;
 
