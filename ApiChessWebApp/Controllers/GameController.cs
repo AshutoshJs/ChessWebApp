@@ -49,5 +49,14 @@ namespace ApiChessWebApp.Controllers
 
             return Ok(board);
         }
+        [HttpGet(Name = "InitalizeGameSecond")]
+        public IActionResult InitalizeGameSecond()
+        {
+            Board2 board = new Board2("ee");
+            var temp = board;
+
+            return Ok(board);
+        }
+
     }
 }

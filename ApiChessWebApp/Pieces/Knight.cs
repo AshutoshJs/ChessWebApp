@@ -10,32 +10,10 @@ namespace ChessLogic
 {
     internal class Knight : Piece
     {
-        public override PieceType Type => PieceType.Knight;
         public override string TypeOfPiece => PieceType.Knight.ToString();
-        public override string HtmlCode { get; set; } = "&#9816";// PiecesHtmlCodesHelper.GetHtmlCodes(PieceType.Knight);
+        public override string HtmlCode { get; set; } = "&#9816";
         public Knight() { }
-
-        public Knight(int x, int y):base(x, y)
-        {}
-        public Knight(int x, int y, char z) : base(x, y, z)
-        { }
-        /*
-        public override PieceType Type => PieceType.Knight;
-
-        public override Player Color { get; }
-
-        public Knight(Player color)
-        {
-            Color = color;
-        }
-
-        public override Piece Copy()
-        {
-            Knight copy = new Knight(Color);
-            copy.HasMoved = HasMoved;
-            return copy;
-            // throw new NotImplementedException();
-        }
-        */
+        public Knight(int x, int y):base(x, y){}
+        public Knight(int x, int y, char z) : base(x, y, z){}
     }
 }

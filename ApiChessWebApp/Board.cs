@@ -41,9 +41,12 @@ namespace ApiChessWebApp
             Pieces[7][7] = new Rook(7,7,'h');
         }
 
-        public Board(Player playerOne, Player playerTwo):this()
+        public Board(Player playerOne, Player playerTwo) : this()
         {
-            
+            for (int i = 0; i <= 7; i++)
+            {
+
+            }
         }
 
         public List<List<Piece?>> FillBoxInitialCordiantes()
