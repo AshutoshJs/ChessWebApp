@@ -10,9 +10,13 @@ namespace ChessLogic
     public class Queen : Piece
     {
         public override string TypeOfPiece => PieceType.Queen.ToString();
-        public override string HtmlCode { get; set; } = "&#9813";// PiecesHtmlCodesHelper.GetHtmlCodes(PieceType.Queen);
+        public override string HtmlCode { get; set; } //= "&#9813";// PiecesHtmlCodesHelper.GetHtmlCodes(PieceType.Queen);
         public Queen(){}
         public Queen(int x, int y) : base(x, y) { }
         public Queen(int x, int y, char z) : base(x, y, z) { }
+        public Queen(int x, int y, char z, Colors c) : base(x, y, z, c)
+        {
+            this.HtmlCode = c == Colors.White ? "&#9813" : "&#9819";
+        }
     }
 }

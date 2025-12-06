@@ -52,11 +52,21 @@ namespace ApiChessWebApp.Controllers
         [HttpGet(Name = "InitalizeGameSecond")]
         public IActionResult InitalizeGameSecond()
         {
-            Board2 board = new Board2("ee");
-            var temp = board;
-
+            Player player1 = new Player(Colors.White, "Ayan");
+            Player player2 = new Player(Colors.Black, "Ayan");
+            Board2 board = new Board2(player1,player2);
             return Ok(board);
         }
+
+        [HttpGet(Name = "GetPossibleMoves")]
+        public IActionResult GetPossibleMovesOnHover()
+        {
+            Player player1 = new Player(Colors.White, "Ayan");
+            Player player2 = new Player(Colors.Black, "Ayan");
+            Board2 board = new Board2(player1, player2);
+            return Ok(board);
+        }
+
 
     }
 }

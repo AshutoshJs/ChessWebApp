@@ -11,9 +11,13 @@ namespace ChessLogic.Pieces
     public class King : Piece
     {
         public override string TypeOfPiece => PieceType.King.ToString();
-        public override string HtmlCode { get; set; } = "&#9812";
+        public override string HtmlCode { get; set; } //= "&#9812";
         public King() { }
         public King(int x, int y) : base(x, y) { }
-        public King(int x, int y, char z) : base(x, y,z) { }
+        public King(int x, int y, char z) : base(x, y, z) { }
+        public King(int x, int y, char z, Colors c) : base(x, y, z, c)
+        { 
+            this.HtmlCode = c == Colors.White ? "&#9812" : "&#9818";
+        }
     }
 }

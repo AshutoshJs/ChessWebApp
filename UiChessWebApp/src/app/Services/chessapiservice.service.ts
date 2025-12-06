@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ChessapiserviceService {
-baseUrl:string="https://localhost:7159/api/Game/InitalizeGame"
+baseUrl:string="https://localhost:7159/api/Game/InitalizeGameSecond"
   
 
 constructor(public http: HttpClient) { }

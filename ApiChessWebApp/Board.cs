@@ -9,13 +9,11 @@ namespace ApiChessWebApp
     {
         //public readonly Piece[,] pieces = new Piece[8,8];
         public List<List<Piece?>> Pieces { get; set; } = new List<List<Piece?>>(8);
-        
         public Board(){}
         public Board(string s, string o) : this(){}
         public Board(string temp) 
         {
             this.FillBoxInitialCordiantes();
-
             //now set the pieces
             Pieces[0][0] = new Rook(0,0,'a');
             Pieces[0][1] = new Knight(0,1,'b');

@@ -12,10 +12,14 @@ namespace ChessLogic
     public class Pawn : Piece
     {
         public override string TypeOfPiece => PieceType.Pawn.ToString();
-        public override string HtmlCode { get; set; } = "&#9817";
+        public override string HtmlCode { get; set; } //= "&#9817";
         public Pawn() { }
         public Pawn(int x, int y) : base(x, y) {}
-        public Pawn(int x, int y, char z) : base(x, y, z) {}
+        public Pawn(int x, int y, char z) : base(x, y, z) { }
+        public Pawn(int x, int y, char z, Colors c) : base(x, y, z, c) 
+        {
+            this.HtmlCode = c == Colors.White ? "&#9817" : "&#9823";
+        }
     }
 }
 
