@@ -53,7 +53,7 @@ initializeBoard(){
       let  a= pieceData[i][j].cordinates.x
       let b=pieceData[i][j].cordinates.y
       if(element != null){
-element.innerHTML = pieceData[a][b]?.piece?.htmlCode ?? "";
+        element.innerHTML = pieceData[a][b]?.piece?.htmlCode ?? "";
 //element.style.color = "white";
       }
       
@@ -75,4 +75,7 @@ element.innerHTML = pieceData[a][b]?.piece?.htmlCode ?? "";
   return "";
   }
 
+  over() {
+    console.log('Mouseover called');
+  }
 }

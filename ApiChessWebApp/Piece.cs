@@ -25,5 +25,7 @@ namespace ApiChessWebApp
             this.IsWhite = ColorCode == Colors.White;
             this.Color = c.ToString();
         }
+
+        //public virtual 
     }
 }

@@ -1,5 +1,7 @@
 
+using ApiChessWebApp.DatabaseContext;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiChessWebApp
 {
@@ -21,6 +23,14 @@ namespace ApiChessWebApp
                    new CorsPolicyBuilder("http://localhost:4200").AllowAnyHeader().Build()
                     );
             });
+
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            //builder.Services.AddDbContext<ChessDbContext>(options => options.UseMySql(connectionString,
+            //    new MySqlConnector(new Version())));
+            builder.Services.AddDbContext<ChessDbContext>(options => options.UseMySql(connectionString,
+             ServerVersion.AutoDetect(connectionString)));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
