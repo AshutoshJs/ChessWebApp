@@ -75,7 +75,25 @@ initializeBoard(){
   return "";
   }
 
-  over() {
+  over(cellCordinate:String) {
+//get cell data cell-0-0-a
+
+var splittedCellCordinates= cellCordinate.split('-');
+console.log("cellCordinate",splittedCellCordinates)
+var cell_X_Coridnate=splittedCellCordinates[1];
+var cell_Y_Coridnate=splittedCellCordinates[2];
+var cell_Z_Coridnate=splittedCellCordinates[3];
+for(let i=0; i<this.piecesDetails.length;i++){
+  for (let j=0;j<this.piecesDetails[i].length;j++){
+    var temp=this.piecesDetails[i];
+    if(this.piecesDetails[i][j].cordinates.x == cell_X_Coridnate &&this.piecesDetails[i][j].cordinates.y== cell_Y_Coridnate&&this.piecesDetails[i][j].cordinates.z==cell_Z_Coridnate)
+      {
+        console.log("data",this.piecesDetails[i][j] )
+      }
+  }
+}
     console.log('Mouseover called');
   }
+
+
 }

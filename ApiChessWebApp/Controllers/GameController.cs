@@ -81,6 +81,17 @@ namespace ApiChessWebApp.Controllers
             return Ok();
         }
 
+        [HttpGet(Name = "MovePiece")]
+        public IActionResult MovePice(Spot from, )
+        {
+            var list = _db.ChessState.ToList();
+
+
+
+
+            return Ok();
+        }
+
 
     }
 }

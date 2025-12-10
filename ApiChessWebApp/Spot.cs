@@ -1,12 +1,12 @@
 ﻿namespace ApiChessWebApp
 {
-    public class Spots//Spots has pieces
+    public class Spot//Spots has pieces
     {
         public Cordinates Cordinates { get; set; }
         public Piece Piece {get; set; }
         public bool IsSpotEmpty => this.Piece == null;
-        public Spots(){}
-        public Spots(Cordinates c)
+        public Spot(){}
+        public Spot(Cordinates c)
         {
             this.Cordinates = c;
         }

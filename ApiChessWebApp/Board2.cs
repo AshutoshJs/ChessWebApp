@@ -6,17 +6,17 @@ namespace ApiChessWebApp
 {
     public class Board2
     {
-        public List<List<Spots>> Spots { get; set; } = new List<List<Spots>>();
+        public List<List<Spot>> Spots { get; set; } = new List<List<Spot>>();
         public Board2(){}
         public Board2(string s)
         {
             for (int i = 0; i < 8; i++)
             {
-                Spots.Add(new List<Spots>());
+                Spots.Add(new List<Spot>());
                 for (int j = 0; j < 8; j++)
                 {
                     var cordinate = new Cordinates(i, j, GetCordinateChar(j));
-                    Spots[i].Add(new Spots(cordinate));
+                    Spots[i].Add(new Spot(cordinate));
                 }
             }
             //Spots has pieces
@@ -48,11 +48,11 @@ namespace ApiChessWebApp
         {
             for (int i = 0; i < 8; i++)
             {
-                Spots.Add(new List<Spots>());
+                Spots.Add(new List<Spot>());
                 for (int j = 0; j < 8; j++)
                 {
                     var cordinate = new Cordinates(i, j, GetCordinateChar(j));
-                    Spots[i].Add(new Spots(cordinate));
+                    Spots[i].Add(new Spot(cordinate));
                 }
             }
             //Spots has pieces

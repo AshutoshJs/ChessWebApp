@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApiChessWebApp;
+using ApiChessWebApp.DatabaseContext;
+using ApiChessWebApp.Models;
 
 //namespace ChessLogic.Pieces
 namespace ChessLogic
@@ -11,6 +13,7 @@ namespace ChessLogic
     
     public class Pawn : Piece
     {
+        private ChessDbContext _dbContext;
         public override string TypeOfPiece => PieceType.Pawn.ToString();
         public override string HtmlCode { get; set; } //= "&#9817";
         public Pawn() { }
@@ -19,6 +22,43 @@ namespace ChessLogic
         public Pawn(int x, int y, char z, Colors c) : base(x, y, z, c) 
         {
             this.HtmlCode = c == Colors.White ? "&#9817" : "&#9823";
+        }
+
+        //Possible move just list then decide spot is empty or not
+        public List<Cordinates> PossibleMoves(Cordinates presentCordnates, ChessState state, List<Cordinates> emptyCordinates)
+        {
+            List<Cordinates > result = new List<Cordinates>();
+            if (this.IsMovingFirstTime == true)
+            {
+                //move two steps
+                int z = presentCordnates.Z ?? 0 + 2;
+                result.Add(new Cordinates(presentCordnates.X + 2, presentCordnates.Y + 2, (char)z));
+
+                //move one step : check for empty space first filter possible move andd 
+
+               
+            }
+            else
+            {
+                int z = presentCordnates.Z ?? 0 + 1;
+                result.Add(new Cordinates(presentCordnates.X + 1, presentCordnates.Y + 1, (char)z));
+            }
+
+
+                return result;
+        }
+        public Piece MakeMove(Cordinates presentCordnates, ChessState state)
+        {
+
+            if(this.IsMovingFirstTime == true)
+            {
+                //move two steps
+
+
+            }
+
+
+            return this;
         }
     }
 }
