@@ -81,11 +81,11 @@ namespace ApiChessWebApp.Controllers
             return Ok();
         }
 
-        [HttpGet(Name = "MovePiece")]
-        public IActionResult MovePice(Spot from, )
+        [HttpPost(Name = "MovePiece")]
+        public IActionResult MovePiece(MovePieceModel? request)
         {
-            var list = _db.ChessState.ToList();
-
+            var boardState = _db.ChessState.ToList();
+            // get all spot list here from chess board state object 
 
 
 
