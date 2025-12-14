@@ -12,12 +12,7 @@ namespace ApiChessWebApp.Controllers
     public class GameController : ControllerBase
     {
         private readonly ChessDbContext _db;
-        
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
+       
         private readonly ILogger<GameController> _logger;
 
         public GameController(ILogger<GameController> logger, ChessDbContext db)
@@ -26,38 +21,17 @@ namespace ApiChessWebApp.Controllers
             _db = db;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
-
-        [HttpGet(Name = "InitalizeGame")]
-        public IActionResult InitalizeGame()//public IEnumerable<Board> InitalizeGame()
+        [HttpGet(Name = "InitalizeGameold")]
+        public IActionResult InitalizeGameOld()//public IEnumerable<Board> InitalizeGame()
         {
             Board board = new Board("ee");
-            /*
-            Question:yai kya return karega FE ko?
-            Answer:inital cordinates of every piece ek calss chiyye jo usko reperesent kare
-
-            Question:
-            Answer:
-
-            Question:
-            Answer:
-             */
-
-
             return Ok(board);
+
         }
-        [HttpGet(Name = "InitalizeGameSecond")]
-        public IActionResult InitalizeGameSecond()
+
+
+        [HttpGet(Name = "InitalizeGame")]
+        public IActionResult InitalizeGame()
         {
             Player player1 = new Player(Colors.White, "Ayan");
             Player player2 = new Player(Colors.Black, "Payan");
@@ -69,7 +43,14 @@ namespace ApiChessWebApp.Controllers
                 GameState = value
 
             };
-            _db.ChessState.Add(chessState);
+            var game = _db.ChessState.FirstOrDefault(x => x.Id == 1);
+            if (game != null)
+            {
+                game.GameState = value;
+            }else
+            {
+                _db.ChessState.Add(chessState);
+            }
             _db.SaveChanges();
             return Ok(board);
         }
@@ -84,12 +65,15 @@ namespace ApiChessWebApp.Controllers
         [HttpPost(Name = "MovePiece")]
         public IActionResult MovePiece(MovePieceModel? request)
         {
-            var boardState = _db.ChessState.ToList();
+            var boardState = _db.ChessState.First(x => x.Id == 1).GameState;
+            Board2 chessState = JsonSerializer.Deserialize<Board2>(boardState.ToString());
+
+
             // get all spot list here from chess board state object 
 
 
 
-            return Ok();
+            return Ok(boardState);
         }
 
 

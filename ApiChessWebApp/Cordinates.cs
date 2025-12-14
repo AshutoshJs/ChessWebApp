@@ -20,5 +20,22 @@
             this.Y = y;
             this.Z = z;
         }
+
+        public override bool Equals(object? obj)
+        {
+            // If the passed object is null, return False
+            if (obj == null)
+            {
+                return false;
+            }
+            // If the passed object is not Customer Type, return False
+            if (!(obj is Cordinates))
+            {
+                return false;
+            }
+
+            return (this.X == ((Cordinates)obj).X)
+                && (this.Y == ((Cordinates)obj).Y);
+        }
     }
 }

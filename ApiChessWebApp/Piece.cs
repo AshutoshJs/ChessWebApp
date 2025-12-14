@@ -1,4 +1,6 @@
 ﻿
+using ApiChessWebApp.Models;
+
 namespace ApiChessWebApp
 {
     public enum Colors
@@ -26,6 +28,12 @@ namespace ApiChessWebApp
             this.Color = c.ToString();
         }
 
-        //public virtual 
+        public virtual bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotsState)
+        {
+
+            return true;
+        }
+
+
     }
 }
