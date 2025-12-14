@@ -10,15 +10,14 @@ namespace ChessLogic
 {
     public class Bishop : Piece
     {
-        public override PieceType Type => PieceType.Bishop;
         public override string TypeOfPiece => PieceType.Bishop.ToString();
-        public override string HtmlCode { get; set; } = "&#9815";//PiecesHtmlCodesHelper.GetHtmlCodes(PieceType.Bishop);
-
+        public override string HtmlCode { get; set; } //PiecesHtmlCodesHelper.GetHtmlCodes(PieceType.Bishop);
         public Bishop() { }
         public Bishop(int x, int y) : base(x, y) { }
-
-            public Bishop(int x, int y, char z) : base(x, y,z) { }
-
-
+        public Bishop(int x, int y, char z) : base(x, y, z) { }
+        public Bishop(int x, int y, char z, Colors c) : base(x, y, z, c) 
+        {
+            this.HtmlCode = c == Colors.White ? "&#9815" : "&#9821";
+        }
     }
 }

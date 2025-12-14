@@ -9,32 +9,15 @@ using ApiChessWebApp;
 namespace ChessLogic.Pieces
 {
     public class King : Piece
-
     {
-        public override PieceType Type => PieceType.King;
         public override string TypeOfPiece => PieceType.King.ToString();
-        public override string HtmlCode { get; set; } = "&#9812";// PiecesHtmlCodesHelper.GetHtmlCodes(PieceType.King);
-        
+        public override string HtmlCode { get; set; } //= "&#9812";
         public King() { }
         public King(int x, int y) : base(x, y) { }
-        public King(int x, int y, char z) : base(x, y,z) { }
-        /*
-        public override PieceType Type => PieceType.King;
-
-        public override Player Color { get; }
-
-        public King(Player color)
-        {
-            Color = color;
+        public King(int x, int y, char z) : base(x, y, z) { }
+        public King(int x, int y, char z, Colors c) : base(x, y, z, c)
+        { 
+            this.HtmlCode = c == Colors.White ? "&#9812" : "&#9818";
         }
-
-        public override Piece Copy()
-        {
-            King copy = new King(Color);
-            copy.HasMoved = HasMoved;
-            return copy;
-            // throw new NotImplementedException();
-        }
-        */
     }
 }

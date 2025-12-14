@@ -34,8 +34,8 @@ initializeBoard(){
     // })
      this.chessService.getData().subscribe({
       next:(res:any)=>{
-        this.piecesDetails= res.pieces;
-        console.log("--->",this.piecesDetails)
+        this.piecesDetails= res.spots;
+        console.log("--->",res.spots)
         this.bindPiceWithHtmlDiv(this.piecesDetails);
       }
      })
@@ -43,19 +43,17 @@ initializeBoard(){
 
   bindPiceWithHtmlDiv(pieceData:any)
   {
-    console.log("pieceDataLength===>",pieceData[0][0].length)
-    console.log("typeOf===>",typeof(pieceData[0][0]))
-    console.log("pieceData[0]",pieceData)
+     console.log("pieceData",pieceData)
     for(let i=0;i<pieceData.length;i++){
       //console.log("pieceData",pieceData[i])
       for(let j=0;j<pieceData.length;j++){
       let id = this.createIdFormCordinate(pieceData[i][j]);  
      
       var element=document.getElementById(id);
-      let  a= pieceData[i][j].pieceCordinates.x
-      let b=pieceData[i][j].pieceCordinates.y
+      let  a= pieceData[i][j].cordinates.x
+      let b=pieceData[i][j].cordinates.y
       if(element != null){
-element.innerHTML = pieceData[a][b].htmlCode;
+        element.innerHTML = pieceData[a][b]?.piece?.htmlCode ?? "";
 //element.style.color = "white";
       }
       
@@ -66,9 +64,9 @@ element.innerHTML = pieceData[a][b].htmlCode;
   }
 
   createIdFormCordinate(pieceCordinates:any): string {
-  let x=pieceCordinates.pieceCordinates.x
-  let y=pieceCordinates.pieceCordinates.y
-  let z=pieceCordinates.pieceCordinates.z
+  let x=pieceCordinates.cordinates.x
+  let y=pieceCordinates.cordinates.y
+  let z=pieceCordinates.cordinates.z
   let str=`cell-${x}-${y}-${z}`
     return str; 
   }
@@ -76,5 +74,26 @@ element.innerHTML = pieceData[a][b].htmlCode;
   {
   return "";
   }
+
+  over(cellCordinate:String) {
+//get cell data cell-0-0-a
+
+var splittedCellCordinates= cellCordinate.split('-');
+console.log("cellCordinate",splittedCellCordinates)
+var cell_X_Coridnate=splittedCellCordinates[1];
+var cell_Y_Coridnate=splittedCellCordinates[2];
+var cell_Z_Coridnate=splittedCellCordinates[3];
+for(let i=0; i<this.piecesDetails.length;i++){
+  for (let j=0;j<this.piecesDetails[i].length;j++){
+    var temp=this.piecesDetails[i];
+    if(this.piecesDetails[i][j].cordinates.x == cell_X_Coridnate &&this.piecesDetails[i][j].cordinates.y== cell_Y_Coridnate&&this.piecesDetails[i][j].cordinates.z==cell_Z_Coridnate)
+      {
+        console.log("data",this.piecesDetails[i][j] )
+      }
+  }
+}
+    console.log('Mouseover called');
+  }
+
 
 }

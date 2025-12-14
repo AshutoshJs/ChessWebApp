@@ -1,4 +1,7 @@
-﻿namespace ApiChessWebApp
+﻿
+using ApiChessWebApp.Models;
+
+namespace ApiChessWebApp
 {
     public enum Colors
     {
@@ -7,20 +10,30 @@
     }
     public class Piece
     {
-        public bool IsMovingFirstTime { get; set; }//because first time pawn can move 2 steps
-        public Cordinates PieceCordinates { get; set; }
-        public Colors Color { get; set; } //=  Colors.Black;
-        public virtual PieceType Type { get; set; }
+        public bool IsMovingFirstTime { get; set; } = true;//because first time pawn can move 2 steps
+        private Cordinates PieceCordinates { get; set; }
+        public Colors? ColorCode{ get; set; }
+        public string? Color { get; set; }
+        public bool IsWhite{ get; set; }
         public virtual string TypeOfPiece { get; set; }
-        public virtual string HtmlCode { get; set; } //=  Colors.Black;
+        public virtual string HtmlCode { get; set; } = "";
         public Piece(){}
-        public Piece(int x, int y)
+        public Piece(int x, int y){this.PieceCordinates = new Cordinates(x, y);}
+        public Piece(int x, int y, char z){this.PieceCordinates = new Cordinates( x,  y, z);}
+        public Piece(int x, int y, char z, Colors c)
         {
-            this.PieceCordinates = new Cordinates(x, y);
+            this.PieceCordinates = new Cordinates(x, y, z); 
+            this.ColorCode = c;
+            this.IsWhite = ColorCode == Colors.White;
+            this.Color = c.ToString();
         }
-        public Piece(int x, int y, char z)
+
+        public virtual bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotsState)
         {
-            this.PieceCordinates = new Cordinates( x,  y, z);
+
+            return true;
         }
+
+
     }
 }

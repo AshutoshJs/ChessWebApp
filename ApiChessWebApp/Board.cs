@@ -9,28 +9,12 @@ namespace ApiChessWebApp
     {
         //public readonly Piece[,] pieces = new Piece[8,8];
         public List<List<Piece?>> Pieces { get; set; } = new List<List<Piece?>>(8);
-        
         public Board(){}
         public Board(string s, string o) : this(){}
         public Board(string temp) 
         {
-            var initState = this.Pieces;
-            var count = this.Pieces.Count;
-            var capacity = this.Pieces.Capacity;
-            for (int i = 0; i < 8; i++)
-            {
-                
-                this.Pieces.Add(new List<Piece?>(8));
-                for (int j = 0; j < 8; j++)
-                {
-                    char z=GetCordinateChar(j);
-
-                    this.Pieces[i].Add(new Piece(i, j, z));
-                }
-
-            }
-           
-
+            this.FillBoxInitialCordiantes();
+            //now set the pieces
             Pieces[0][0] = new Rook(0,0,'a');
             Pieces[0][1] = new Knight(0,1,'b');
             Pieces[0][2] = new Bishop(0,2,'c');
@@ -55,27 +39,79 @@ namespace ApiChessWebApp
             Pieces[7][7] = new Rook(7,7,'h');
         }
 
+        public Board(Player playerOne, Player playerTwo) : this()
+        {
+            for (int i = 0; i <= 7; i++)
+            {
+
+            }
+        }
+
+        public List<List<Piece?>> FillBoxInitialCordiantes()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                this.Pieces.Add(new List<Piece?>(8));
+                for (int j = 0; j < 8; j++)
+                {
+                    char z = GetCordinateChar(j);
+
+                    this.Pieces[i].Add(new Piece(i, j, z));
+                }
+            }
+            return new List<List<Piece?>>();
+        }
+
         public static char GetCordinateChar(int i)
         {
-            char a = ' ';
-            if (i == 0)
-                a = 'a';
-            else if (i == 1)
-                a = 'b';
-            else if (i == 2)
-                a = 'c';
-            else if (i == 3)
-                a = 'd';
-            else if (i == 4)
-                a = 'e';
-            else if (i == 5)
-                a = 'f';
-            else if (i == 6)
-                a = 'g';
-            else if (i == 7)
-                a = 'h';
+            switch (i)
+            {
+                case 0:
+                    return 'a';
+                    break;
+                case 1:
+                    return 'b';
+                    break;
+                case 2:
+                    return 'c';
+                    break;
+                case 3:
+                    return 'd';
+                    break;
+                case 4:
+                    return 'e';
+                    break;
+                case 5:
+                    return 'f';
+                    break;
+                case 6:
+                    return 'g';
+                    break;
+                case 7:
+                    return 'h';
+                    break;
+                default:
+                    return ' ';
+            }
+            //char a = ' ';
+            //if (i == 0)
+            //    a = 'a';
+            //else if (i == 1)
+            //    a = 'b';
+            //else if (i == 2)
+            //    a = 'c';
+            //else if (i == 3)
+            //    a = 'd';
+            //else if (i == 4)
+            //    a = 'e';
+            //else if (i == 5)
+            //    a = 'f';
+            //else if (i == 6)
+            //    a = 'g';
+            //else if (i == 7)
+            //    a = 'h';
 
-            return a;
+            //return a;
         }
     }
 }

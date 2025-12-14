@@ -9,33 +9,14 @@ namespace ChessLogic
 {
     public class Queen : Piece
     {
-        public override PieceType Type => PieceType.Queen;
         public override string TypeOfPiece => PieceType.Queen.ToString();
-        public override string HtmlCode { get; set; } = "&#9813";// PiecesHtmlCodesHelper.GetHtmlCodes(PieceType.Queen);
-      
-        public Queen()
-        {
-            
-        }
+        public override string HtmlCode { get; set; } //= "&#9813";// PiecesHtmlCodesHelper.GetHtmlCodes(PieceType.Queen);
+        public Queen(){}
         public Queen(int x, int y) : base(x, y) { }
         public Queen(int x, int y, char z) : base(x, y, z) { }
-        /*
-        public override PieceType Type => PieceType.Queen;
-
-        public override Player Color { get; }
-
-        public Queen(Player color)
+        public Queen(int x, int y, char z, Colors c) : base(x, y, z, c)
         {
-            Color = color;
+            this.HtmlCode = c == Colors.White ? "&#9813" : "&#9819";
         }
-
-        public override Piece Copy()
-        {
-            Queen copy = new Queen(Color);
-            copy.HasMoved = HasMoved;
-            return copy;
-            // throw new NotImplementedException();
-        }
-        */
     }
 }
