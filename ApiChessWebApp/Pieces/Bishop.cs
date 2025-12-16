@@ -32,101 +32,76 @@ namespace ChessLogic
                 return false;
             }
 
-
-           if(startX < endX && startY < endY)//00 to 11 down-right
+            if (Math.Abs(endX - startX) != Math.Abs(endY - startY))
             {
-                var x1=startX+1;
-                var y1=startY+1;
-                if( (endY - startY) / (endX - startX) == 1)
-                {
-                    //for(int i = 0; i < (endX - startX); i++)
-                    
-                    while(x1 < endX && y1 < endY)
-                    {
-                        if (boardSpotStates[(int)x1][(int)y1].Piece != null)
-                        {
-                            return false;
-                        }
-                        x1 = x1 + 1;
-                        y1 = y1 + 1;
-
-                    }
-
-                    return true;
-                }
+                return false;
             }
-            else if (endX < startX && endY <startY)// 33 to 22  up-left
+
+            if (startX < endX && startY < endY)//00 to 11 down-right
+            {
+                var x1 = startX + 1;
+                var y1 = startY + 1;
+                while (x1 < endX && y1 < endY)
+                {
+                    if (boardSpotStates[(int)x1][(int)y1].Piece != null)
+                    {
+                        return false;
+                    }
+                    x1 = x1 + 1;
+                    y1 = y1 + 1;
+                }
+                return true;
+            }
+            else if (endX < startX && endY < startY)// 33 to 22  up-left
             {
                 var x1 = startX - 1;
                 var y1 = startY - 1;
-                if ((endY - startY) / (endX - startX) == 1)
+
+                while (x1 > endX && y1 > endY)
                 {
-                    //for(int i = 0; i < (endX - startX); i++)
-
-                    while (x1 > endX && y1 > endY)
+                    if (boardSpotStates[(int)x1][(int)y1].Piece != null)
                     {
-                        if (boardSpotStates[(int)x1][(int)y1].Piece != null)
-                        {
-                            return false;
-                        }
-                        x1 = x1 - 1;
-                        y1 = y1 - 1;
-
+                        return false;
                     }
+                    x1 = x1 - 1;
+                    y1 = y1 - 1;
 
-                    return true;
                 }
-
-                // return (startY - endY) / (startX - endX) == 1;
+                return true;
             }
             else if (startX > endX && startY < endY)// 30 to 21 up right
             {
                 var x1 = startX - 1;
                 var y1 = startY + 1;
-                if ((endY - startY) / (endX - startX) == 1)
+
+                while (x1 > endX && y1 < endY)
                 {
-                    //for(int i = 0; i < (endX - startX); i++)
-
-                    while (x1 > endX && y1 < endY)
+                    if (boardSpotStates[(int)x1][(int)y1].Piece != null)
                     {
-                        if (boardSpotStates[(int)x1][(int)y1].Piece != null)
-                        {
-                            return false;
-                        }
-                        x1 = x1 - 1;
-                        y1 = y1 + 1;
-
+                        return false;
                     }
+                    x1 = x1 - 1;
+                    y1 = y1 + 1;
 
-                    return true;
                 }
-
-                // return (startY - endY) / (startX - endX) == -1;
+                return true;
             }
-            else if (startX < endX && startY > endY)// 03 to 12 up right
+            else if (startX < endX && startY > endY)// 03 to 12 down left
             {
                 var x1 = startX + 1;
                 var y1 = startY - 1;
-                if ((endY - startY) / (endX - startX) == 1)
+                while (x1 < endX && y1 > endY)
                 {
-                    //for(int i = 0; i < (endX - startX); i++)
-
-                    while (x1 > endX && y1 < endY)
+                    if (boardSpotStates[(int)x1][(int)y1].Piece != null)
                     {
-                        if (boardSpotStates[(int)x1][(int)y1].Piece != null)
-                        {
-                            return false;
-                        }
-                        x1 = x1 + 1;
-                        y1 = y1 - 1;
-
+                        return false;
                     }
+                    x1 = x1 + 1;
+                    y1 = y1 - 1;
 
-                    return true;
                 }
-                //return (startY - endY) / (startX - endX) == -1;
+                return true;
             }
-
             return false;
         }
     }
