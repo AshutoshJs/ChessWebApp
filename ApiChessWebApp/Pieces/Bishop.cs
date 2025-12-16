@@ -19,5 +19,54 @@ namespace ChessLogic
         {
             this.HtmlCode = c == Colors.White ? "&#9815" : "&#9821";
         }
+        public override bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotStates)
+        {
+            List<Cordinates> spotsForKnight = new List<Cordinates>();
+            decimal startX = from.Cordinates.X;
+            decimal startY = from.Cordinates.Y;
+            decimal endX = to.Cordinates.X;
+            decimal endY = to.Cordinates.Y;
+
+            if (startX < 0 || startY < 0 || startX > 7 || startY > 7 || endX < 0 || endY < 0 || endX > 7 || endY > 7)
+            {
+                return false;
+            }
+
+
+           if(startX < endX && startY < endY)//00 to 11 down-right
+            {
+                var x1=startX+1;
+                var y1=startY+1;
+                if( (endY - startY) / (endX - startX) == 1)
+                {
+                    for(int i = 0; i < (endX - startX); i++)
+                    {
+                        if (boardSpotStates[(int)x1][(int)y1].Piece != null)
+                        {
+                            return false;
+                        }
+                        x1 = x1 + 1;
+                        y1 = y1 + 1;
+
+                    }
+
+                    return true;
+                }
+            }
+            else if (endX < startX && endY <startY)// 33 to 22  up-left
+            {
+                return (startY - endY) / (startX - endX) == 1;
+            }
+            else if (startX > endX && startY < endY)// 30 to 21 up right
+            {
+                return (startY - endY) / (startX - endX) == -1;
+            }
+            else if (startX < endX && startY > endY)// 03 to 12 up right
+            {
+                return (startY - endY) / (startX - endX) == -1;
+            }
+
+            return false;
+        }
     }
 }
