@@ -18,5 +18,21 @@ namespace ChessLogic
         {
             this.HtmlCode = c == Colors.White ? "&#9813" : "&#9819";
         }
+
+        public override bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotStates)
+        {
+            List<Cordinates> spotsForKnight = new List<Cordinates>();
+            decimal startX = from.Cordinates.X;
+            decimal startY = from.Cordinates.Y;
+            decimal endX = to.Cordinates.X;
+            decimal endY = to.Cordinates.Y;
+
+            if (startX < 0 || startY < 0 || startX > 7 || startY > 7 || endX < 0 || endY < 0 || endX > 7 || endY > 7)
+            {
+                return false;
+            }
+
+            return false;
+        }
     }
 }

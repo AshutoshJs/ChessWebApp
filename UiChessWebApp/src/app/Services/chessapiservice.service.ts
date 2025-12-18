@@ -6,13 +6,15 @@ import { Observable } from 'rxjs';
 })
 export class ChessapiserviceService {
 baseUrl:string="https://localhost:7159/api/Game/InitalizeGameSecond"
+
+initalizeGameold:string = "https://localhost:7159/api/Game/InitalizeGame"
   
 
 constructor(public http: HttpClient) { }
 
 
 public getData(): Observable<string> {
-return this.http.get<any>(this.baseUrl);
+return this.http.get<any>(this.initalizeGameold);
 // return this.http.get<any>(this.baseUrl).subscribe(data => {console.log("dataFromService",data);
 //     return data} );
   //return items;

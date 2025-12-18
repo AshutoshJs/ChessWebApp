@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ChessapiserviceService } from '../../Services/chessapiservice.service';
 import { Piece} from '../../Helper/classes/Piece'
+import { CdkDrag, CdkDropList, DragDrop } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-board',
-  imports: [],
+  imports: [CommonModule, CdkDrag, CdkDropList],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
