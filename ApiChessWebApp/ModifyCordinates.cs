@@ -4,7 +4,8 @@
     {
         XYBoth,
         XOnly,
-        YOnly
+        YOnly,
+        None
     }
     public static class ModifyCordinates
     {
@@ -44,6 +45,24 @@
             {
                 return new Cordinates(x - n, y - n);
             }
+            return new Cordinates(x, y);
+        }
+
+        public static Cordinates SubstractInXAddInYCordinates(Cordinates c, int n, AddSubstractFlag flag = AddSubstractFlag.None)
+        {
+            var x = c.X;
+            var y = c.Y;
+            x = x - n;
+            y = y + n;
+            return new Cordinates(x, y);
+        }
+
+        public static Cordinates AddInXSubstractInYCordinates(Cordinates c, int n, AddSubstractFlag flag = AddSubstractFlag.None)
+        {
+            var x = c.X;
+            var y = c.Y;
+            x = x + n;
+            y = y - n;
             return new Cordinates(x, y);
         }
     }

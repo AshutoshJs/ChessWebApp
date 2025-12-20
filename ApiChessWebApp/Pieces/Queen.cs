@@ -27,7 +27,6 @@ namespace ChessLogic
             decimal startY = from.Cordinates.Y;
             decimal endX = to.Cordinates.X;
             decimal endY = to.Cordinates.Y;
-
             if (startX < 0 || startY < 0 || startX > 7 || startY > 7 || endX < 0 || endY < 0 || endX > 7 || endY > 7)
             {
                 return false;
