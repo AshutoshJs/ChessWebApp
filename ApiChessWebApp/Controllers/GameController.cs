@@ -36,7 +36,7 @@ namespace ApiChessWebApp.Controllers
             Player player1 = new Player(Colors.White, "Ayan");
             Player player2 = new Player(Colors.Black, "Payan");
             Board2 board = new Board2(player1,player2);
-
+            
             var value = JsonSerializer.Serialize(board);
             ChessState chessState = new ChessState()
             {

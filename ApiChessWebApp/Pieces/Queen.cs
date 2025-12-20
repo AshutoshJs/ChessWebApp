@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApiChessWebApp;
+using ApiChessWebApp.Pieces;
 
 namespace ChessLogic
 {
@@ -21,7 +22,7 @@ namespace ChessLogic
 
         public override bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotStates)
         {
-            List<Cordinates> spotsForKnight = new List<Cordinates>();
+            /*List<Cordinates> spotsForKnight = new List<Cordinates>();
             decimal startX = from.Cordinates.X;
             decimal startY = from.Cordinates.Y;
             decimal endX = to.Cordinates.X;
@@ -31,8 +32,20 @@ namespace ChessLogic
             {
                 return false;
             }
+            */
+            Bishop bishop = new Bishop();
+            Rook rook = new Rook();
 
-            return false;
+            if(bishop.CanMove(from, to, piece, boardSpotStates) || rook.CanMove(from, to, piece, boardSpotStates))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+                return false;
         }
     }
 }
