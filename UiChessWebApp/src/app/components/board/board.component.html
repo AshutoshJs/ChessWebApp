@@ -11,8 +11,8 @@
     <div>
         <h3>Welcome to ChessWebapp</h3>
         <div class="chessboard">
-<div class="b"><span id="cell-0-0-a" (mouseover)="over('cell-0-0-a')" cdkDrag></span></div>
-<div class="a" ><span id="cell-0-1-b" (mouseover)="over('cell-0-1-b')"></span></div>
+<div class="b" ><div cdkDrag style="display: flex;align-items:center" (cdkDropListDropped)="drop($event)"><span id="cell-0-0-a" (mouseover)="over('cell-0-0-a')" ></span></div></div>
+<div cdkDropList cdkDropListOrientation="mixed" class="a"   (cdkDropListDropped)="drop($event)"><span id="cell-0-1-b" (mouseover)="over('cell-0-1-b')"></span></div>
 <div class="b"><span id="cell-0-2-c"></span></div>
 <div class="a"><span id="cell-0-3-d"></span></div>
 <div class="b"><span id="cell-0-4-e"></span></div>
