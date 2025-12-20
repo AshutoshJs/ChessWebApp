@@ -49,13 +49,8 @@ namespace ChessLogic.Pieces
             spotsForKing.Add(move6);
             spotsForKing.Add(move7);
             spotsForKing.Add(move8);
-
-            spotsForKing = spotsForKing.Where(x => (x.X >= 0 || x.X <= 7) && (x.Y >= 0 || x.Y <= 7)).ToList();
-
+            spotsForKing = spotsForKing.Where(x => (x.X >= 0 && x.X <= 7) && (x.Y >= 0 && x.Y <= 7)).ToList();
             return spotsForKing.Any(x => x.Equals(to.Cordinates));
-
-
-            return false;
         }
     }
 }

@@ -94,8 +94,10 @@ for(let i=0; i<this.piecesDetails.length;i++){
       }
   }
 }
-    console.log('Mouseover called');
+   // console.log('Mouseover called');
   }
 
-
+drop(event:any){
+console.log("drop event")
+}
 }
