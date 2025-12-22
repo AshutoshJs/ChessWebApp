@@ -102,11 +102,18 @@ for(let i=0; i<this.piecesDetails.length;i++){
 // drop(event:any){
 // console.log("drop event")
 // }
-drop(event: CdkDragDrop<string[]>,cells:any) {
-  console.log("cell",cells)  
+drop(event: CdkDragDrop<string[]>) {
+   
   console.log("drop event",event)
+   const from = event.item.data; 
+  const to   = event.container.data;
+console.log("drop from",from.id)
+//console.log("drop to", to.id))
   }
 
+onDragStart(event:any){
+console.log("drag event",event)
+}
   /*
   Correct Mental Model for Chess ♟️
 Chess Concept	CDK Concept
