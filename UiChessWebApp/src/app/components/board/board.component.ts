@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ChessapiserviceService } from '../../Services/chessapiservice.service';
 import { Piece} from '../../Helper/classes/Piece'
-import { CdkDrag, CdkDropList, DragDrop } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDropList, DragDrop } from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
+import { transferArrayItem } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-board',
   imports: [CommonModule, CdkDrag, CdkDropList],
@@ -97,7 +99,21 @@ for(let i=0; i<this.piecesDetails.length;i++){
    // console.log('Mouseover called');
   }
 
-drop(event:any){
-console.log("drop event")
-}
+// drop(event:any){
+// console.log("drop event")
+// }
+drop(event: CdkDragDrop<string[]>,cells:any) {
+  console.log("cell",cells)  
+  console.log("drop event",event)
+  }
+
+  /*
+  Correct Mental Model for Chess ♟️
+Chess Concept	CDK Concept
+Square	cdkDropList
+Piece	cdkDrag
+Move	cdkDropListDropped
+From / To	previousContainer → container
+  */
+
 }
