@@ -25,7 +25,7 @@ namespace ChessLogic
         }
 
         //Possible move just list then decide spot is empty or not
-        public List<Cordinates> PossibleMoves(Cordinates presentCordnates, ChessState state, List<Cordinates> emptyCordinates)
+        /*public List<Cordinates> PossibleMoves(Cordinates presentCordnates, ChessState state, List<Cordinates> emptyCordinates)
         {
             List<Cordinates > result = new List<Cordinates>();
             if (this.IsMovingFirstTime == true)
@@ -51,7 +51,7 @@ namespace ChessLogic
                 //move two steps
             }
             return this;
-        }
+        }*/
 
         public override bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotStates)
         {
