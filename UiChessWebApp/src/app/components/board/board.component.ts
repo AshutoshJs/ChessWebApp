@@ -99,20 +99,13 @@ for(let i=0; i<this.piecesDetails.length;i++){
    // console.log('Mouseover called');
   }
 
-// drop(event:any){
-// console.log("drop event")
-// }
-drop(event: CdkDragDrop<string[]>) {
-   
-  console.log("drop event",event)
-   const from = event.item.data; 
-  const to   = event.container.data;
-console.log("drop from",from.id)
-//console.log("drop to", to.id))
+drop(event: CdkDragDrop<any>) {
+  console.log("drop event data",event)
+  console.log("drop event",event.container.data)
   }
 
 onDragStart(event:any){
-console.log("drag event",event)
+console.log("drag event 2",event)
 }
   /*
   Correct Mental Model for Chess ♟️
