@@ -101,7 +101,8 @@ for(let i=0; i<this.piecesDetails.length;i++){
 
 drop(event: CdkDragDrop<any>) {
   console.log("drop event data",event)
-  console.log("drop event",event.container.data)
+  console.log("drop event current container data",event.container.data)
+  console.log("drop event previous container data",event.previousContainer.data)
   }
 
 onDragStart(event:any){
