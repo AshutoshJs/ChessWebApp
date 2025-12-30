@@ -80,8 +80,6 @@ initializeBoard(){
   }
 
   over(cellCordinate:String) {
-//get cell data cell-0-0-a
-
 var splittedCellCordinates= cellCordinate.split('-');
 console.log("cellCordinate",splittedCellCordinates)
 var cell_X_Coridnate=splittedCellCordinates[1];
