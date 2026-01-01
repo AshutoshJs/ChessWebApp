@@ -80,8 +80,6 @@ initializeBoard(){
   }
 
   over(cellCordinate:String) {
-//get cell data cell-0-0-a
-
 var splittedCellCordinates= cellCordinate.split('-');
 console.log("cellCordinate",splittedCellCordinates)
 var cell_X_Coridnate=splittedCellCordinates[1];
@@ -99,20 +97,14 @@ for(let i=0; i<this.piecesDetails.length;i++){
    // console.log('Mouseover called');
   }
 
-// drop(event:any){
-// console.log("drop event")
-// }
-drop(event: CdkDragDrop<string[]>) {
-   
-  console.log("drop event",event)
-   const from = event.item.data; 
-  const to   = event.container.data;
-console.log("drop from",from.id)
-//console.log("drop to", to.id))
+drop(event: CdkDragDrop<any>) {
+  console.log("drop event data",event)
+  console.log("drop event current container data",event.container.data)
+  console.log("drop event previous container data",event.previousContainer.data)
   }
 
 onDragStart(event:any){
-console.log("drag event",event)
+console.log("drag event 2",event)
 }
   /*
   Correct Mental Model for Chess ♟️
