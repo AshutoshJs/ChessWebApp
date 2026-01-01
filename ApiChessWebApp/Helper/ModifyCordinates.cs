@@ -1,4 +1,4 @@
-﻿namespace ApiChessWebApp
+﻿namespace ApiChessWebApp.Helper
 {
     public enum AddSubstractFlag
     {

@@ -64,7 +64,17 @@ namespace ChessLogic
             {
                 return false;
             }
+            //right diagronal if any pice there , left diagonal if there aany pice
+            endX == startX+
+            if (piece.IsMovingFirstTime)
+            {
 
+
+            }
+            else
+            {
+
+            }
 
 
             return true;
