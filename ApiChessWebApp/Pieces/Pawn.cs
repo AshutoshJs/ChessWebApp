@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApiChessWebApp;
 using ApiChessWebApp.DatabaseContext;
+using ApiChessWebApp.Helper;
 using ApiChessWebApp.Models;
 
 //namespace ChessLogic.Pieces
@@ -53,6 +54,7 @@ namespace ChessLogic
             return this;
         }*/
 
+        //pawn logic should be color-agnostic so assuming White goes DOWN and Black moves UP
         public override bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotStates)
         {
             List<Cordinates> spotsForKing = new List<Cordinates>();
@@ -65,16 +67,29 @@ namespace ChessLogic
                 return false;
             }
             //right diagronal if any pice there , left diagonal if there aany pice
-            endX == startX+
-            if (piece.IsMovingFirstTime)
-            {
 
+            /*
+             * two step logic
+            pawn will cehk in this case whether there is any piece in btween and in that positon bcasue in case of other they
+            will cut those piece but pawn cuts diagonally and move straingt so need to cehck both the box for empty
+            */
+            if (from.Piece.IsMovingFirstTime)
+            {
+                if (/*from.Cordinates.X == 1 &&*/ from.Piece.IsWhite)// because 
+                {
+                    return endX == startX + 2 && /*Pice null check*/boardSpotStates[startX+1][startY].IsSpotEmpty && boardSpotStates[startX + 2][startY].IsSpotEmpty ? true : false;
+                }
+                else if (from.Cordinates.X == 6 && !from.Piece.IsWhite)
+                {
+                    return endX == startX - 2 && /*Pice null check*/boardSpotStates[startX - 1][startY].IsSpotEmpty && boardSpotStates[startX - 2][startY].IsSpotEmpty ? true : false;
+                }
 
             }
-            else
-            {
+            //normal one step logic
 
-            }
+
+            //diagonal logic
+
 
 
             return true;
