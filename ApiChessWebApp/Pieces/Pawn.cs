@@ -55,6 +55,17 @@ namespace ChessLogic
         }*/
 
         //pawn logic should be color-agnostic so assuming White goes DOWN and Black moves UP
+        /*
+         For any pawn move
+         Is the move straight or diagonal?
+         If straight:
+         Is it forward?
+         Is it 1 or 2 squares?
+         If diagonal:
+         Is there an enemy piece?
+         Does color allow this direction?
+         Is first-move rule respected?
+         */
         public override bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotStates)
         {
             List<Cordinates> spotsForKing = new List<Cordinates>();
@@ -62,7 +73,8 @@ namespace ChessLogic
             int startY = from.Cordinates.Y;
             int endX = to.Cordinates.X;
             int endY = to.Cordinates.Y;
-            int deltaX = startX - startY;
+            int deltaX = endX - startX;//Positive deltaX = moving DOWN, Negative deltaX = moving UP
+            int deltaY = endY - startY;
             if (startX < 0 || startY < 0 || startX > 7 || startY > 7 || endX < 0 || endY < 0 || endX > 7 || endY > 7)
             {
                 return false;
@@ -74,35 +86,37 @@ namespace ChessLogic
             pawn will cehk in this case whether there is any piece in btween and in that positon bcasue in case of other they
             will cut those piece but pawn cuts diagonally and move straingt so need to cehck both the box for empty
             */
-            if (startY == endY && (endX - startX == 2 ||  startX - endX == 2))
-            //if (startY == endY && (deltaX == 2 || deltaX == -2))
+            //if (startY == endY && (endX - startX == 2 ||  startX - endX == 2))
+            if(startY == endY && (deltaX == 2 || deltaX == -2))
             {
                 if (from.Piece.IsMovingFirstTime)
                 {
                     if (from.Cordinates.X == 1 && from.Piece.IsWhite)// because downward movement
                     {
-                        return endX == startX + 2 && /*Pice null check*/boardSpotStates[startX + 1][startY].IsSpotEmpty && boardSpotStates[startX + 2][startY].IsSpotEmpty ? true : false;
+                        //return endX == startX + 2 && /*Pice null check*/boardSpotStates[startX + 1][startY].IsSpotEmpty && boardSpotStates[startX + 2][startY].IsSpotEmpty ? true : false;
+                        return /*Pice null check*/boardSpotStates[startX + 1][startY].IsSpotEmpty && boardSpotStates[startX + 2][startY].IsSpotEmpty ? true : false;
                     }
                     else if (from.Cordinates.X == 6 && !from.Piece.IsWhite)
                     {
-                        return endX == startX - 2 && /*Pice null check*/boardSpotStates[startX - 1][startY].IsSpotEmpty && boardSpotStates[startX - 2][startY].IsSpotEmpty ? true : false;
+                        return /*Pice null check*/boardSpotStates[startX - 1][startY].IsSpotEmpty && boardSpotStates[startX - 2][startY].IsSpotEmpty ? true : false;
+                        //return endX == startX - 2 && /*Pice null check*/boardSpotStates[startX - 1][startY].IsSpotEmpty && boardSpotStates[startX - 2][startY].IsSpotEmpty ? true : false;
                     }
                 }
                 else
                 {
                     return false;
                 }
-
             }
             // we have checked +2 case above so now here we will reach in case of +1 case only
             //normal one step logic
 
-            if (endX == startX + 1 && endY == startY && endX < 8 && boardSpotStates[endX][startY].IsSpotEmpty && from.Piece.IsWhite)// Dowward white movement
+            //if (endX == startX + 1 && endY == startY && endX < 8 && boardSpotStates[endX][startY].IsSpotEmpty && from.Piece.IsWhite)// Dowward white movement
+            if (deltaX == 1 && endY == startY  && endX < 8 && boardSpotStates[endX][startY].IsSpotEmpty && from.Piece.IsWhite)// Dowward white movement
             {
                 return true;
             }
 
-            if (endX == startX - 1 && endY == startY && endX >= 0 && boardSpotStates[endX][startY].IsSpotEmpty && !from.Piece.IsWhite)// Upward black movement
+            if (deltaX == - 1 && endY == startY && endX < startX && endX >= 0 && boardSpotStates[endX][startY].IsSpotEmpty && !from.Piece.IsWhite)// Upward black movement
             {
                 return true;
             }
@@ -113,7 +127,7 @@ namespace ChessLogic
                 if (from.Piece.IsWhite)
                 {
                     //if ( ((endX == startX + 1 && endY == startY + 1) && endX <= 7 && endY <= 7 ) || ((endX == startX + 1 && endY == startY - 1) && endX <= 7 && endY <= 7))// Diagonal white movement
-                    if ( endX <= 7 && endY <= 7 && endX> startX/*forward only check*/ && ((endX == startX + 1 && endY == startY + 1) || (endX == startX + 1 && endY == startY - 1) ))// Diagonal white movement  
+                    if ( endX <= 7 && endY <= 7 && endX > startX/*forward only check*/ && ((endX == startX + 1 && endY == startY + 1) || (endX == startX + 1 && endY == startY - 1) ))// Diagonal white movement  
                         return true;
                 }
                 else if(!from.Piece.IsWhite) //
