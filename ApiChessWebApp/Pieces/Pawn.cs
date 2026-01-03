@@ -62,6 +62,7 @@ namespace ChessLogic
             int startY = from.Cordinates.Y;
             int endX = to.Cordinates.X;
             int endY = to.Cordinates.Y;
+            int deltaX = startX - startY;
             if (startX < 0 || startY < 0 || startX > 7 || startY > 7 || endX < 0 || endY < 0 || endX > 7 || endY > 7)
             {
                 return false;
@@ -73,26 +74,57 @@ namespace ChessLogic
             pawn will cehk in this case whether there is any piece in btween and in that positon bcasue in case of other they
             will cut those piece but pawn cuts diagonally and move straingt so need to cehck both the box for empty
             */
-            if (from.Piece.IsMovingFirstTime)
+            if (startY == endY && (endX - startX == 2 ||  startX - endX == 2))
+            //if (startY == endY && (deltaX == 2 || deltaX == -2))
             {
-                if (/*from.Cordinates.X == 1 &&*/ from.Piece.IsWhite)// because 
+                if (from.Piece.IsMovingFirstTime)
                 {
-                    return endX == startX + 2 && /*Pice null check*/boardSpotStates[startX+1][startY].IsSpotEmpty && boardSpotStates[startX + 2][startY].IsSpotEmpty ? true : false;
+                    if (from.Cordinates.X == 1 && from.Piece.IsWhite)// because downward movement
+                    {
+                        return endX == startX + 2 && /*Pice null check*/boardSpotStates[startX + 1][startY].IsSpotEmpty && boardSpotStates[startX + 2][startY].IsSpotEmpty ? true : false;
+                    }
+                    else if (from.Cordinates.X == 6 && !from.Piece.IsWhite)
+                    {
+                        return endX == startX - 2 && /*Pice null check*/boardSpotStates[startX - 1][startY].IsSpotEmpty && boardSpotStates[startX - 2][startY].IsSpotEmpty ? true : false;
+                    }
                 }
-                else if (from.Cordinates.X == 6 && !from.Piece.IsWhite)
+                else
                 {
-                    return endX == startX - 2 && /*Pice null check*/boardSpotStates[startX - 1][startY].IsSpotEmpty && boardSpotStates[startX - 2][startY].IsSpotEmpty ? true : false;
+                    return false;
                 }
 
             }
+            // we have checked +2 case above so now here we will reach in case of +1 case only
             //normal one step logic
 
+            if (endX == startX + 1 && endY == startY && endX < 8 && boardSpotStates[endX][startY].IsSpotEmpty && from.Piece.IsWhite)// Dowward white movement
+            {
+                return true;
+            }
+
+            if (endX == startX - 1 && endY == startY && endX >= 0 && boardSpotStates[endX][startY].IsSpotEmpty && !from.Piece.IsWhite)// Upward black movement
+            {
+                return true;
+            }
 
             //diagonal logic
-
-
-
-            return true;
+            if (!boardSpotStates[endX][endY].IsSpotEmpty && boardSpotStates[endX][endY].Piece.IsWhite != from.Piece.IsWhite)
+            {
+                if (from.Piece.IsWhite)
+                {
+                    //if ( ((endX == startX + 1 && endY == startY + 1) && endX <= 7 && endY <= 7 ) || ((endX == startX + 1 && endY == startY - 1) && endX <= 7 && endY <= 7))// Diagonal white movement
+                    if ( endX <= 7 && endY <= 7 && endX> startX/*forward only check*/ && ((endX == startX + 1 && endY == startY + 1) || (endX == startX + 1 && endY == startY - 1) ))// Diagonal white movement  
+                        return true;
+                }
+                else if(!from.Piece.IsWhite) //
+                {
+                    if (endX >= 0 && endY >= 0 && endX< startX/*forward only check*/ && ((endX == startX - 1 && endY == startY - 1) || (endX == startX - 1 && endY == startY + 1)))// Diagonal black movement
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }
