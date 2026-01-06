@@ -76,6 +76,18 @@ namespace ApiChessWebApp.Controllers
             return Ok(boardState);
         }
 
+        [HttpPost(Name = "IsMovePossible")]
+        public IActionResult CanMove(MovePieceModel? request)
+        {
+            var boardState = _db.ChessState.First(x => x.Id == 1).GameState;
+            Board2 chessState = JsonSerializer.Deserialize<Board2>(boardState.ToString());
 
+
+            // get all spot list here from chess board state object 
+
+
+
+            return Ok(boardState);
+        }
     }
 }
