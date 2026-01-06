@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApiChessWebApp;
 using ApiChessWebApp.DatabaseContext;
+using ApiChessWebApp.Helper;
 using ApiChessWebApp.Models;
 
 //namespace ChessLogic.Pieces
@@ -53,6 +54,8 @@ namespace ChessLogic
             return this;
         }*/
 
+        //pawn logic should be color-agnostic so assuming White goes DOWN and Black moves UP
+        //Note : Removed the position based coupling (eg.from.Cordinates.X == 1, from.Cordinates.X == 6) bcz. This works only if board orientation never changes.
         public override bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotStates)
         {
             List<Cordinates> spotsForKing = new List<Cordinates>();
@@ -60,24 +63,75 @@ namespace ChessLogic
             int startY = from.Cordinates.Y;
             int endX = to.Cordinates.X;
             int endY = to.Cordinates.Y;
+            int deltaX = endX - startX;//Positive deltaX = moving DOWN, Negative deltaX = moving UP
+            int deltaY = endY - startY;
             if (startX < 0 || startY < 0 || startX > 7 || startY > 7 || endX < 0 || endY < 0 || endX > 7 || endY > 7)
             {
                 return false;
             }
-            //right diagronal if any pice there , left diagonal if there aany pice
-            endX == startX+
-            if (piece.IsMovingFirstTime)
+            /*
+            if(startY == endY && ((deltaX == 2 && from.Piece.IsWhite) || (deltaX == -2 && !from.Piece.IsWhite)))
             {
-
-
+                if (from.Piece.IsMovingFirstTime)
+                {
+                    if (from.Cordinates.X == 1 && from.Piece.IsWhite)// because downward movement
+                    {
+                        return boardSpotStates[startX + 1][startY].IsSpotEmpty && boardSpotStates[startX + 2][startY].IsSpotEmpty ? true : false;
+                    }
+                    else if (from.Cordinates.X == 6 && !from.Piece.IsWhite)
+                    {
+                        return boardSpotStates[startX - 1][startY].IsSpotEmpty && boardSpotStates[startX - 2][startY].IsSpotEmpty ? true : false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+           */
+           
+            if (startY == endY && from.Piece.IsMovingFirstTime)
             {
+              
+                if (from.Piece.IsWhite && deltaX == 2)
+                {
+                    return boardSpotStates[startX + 1][startY].IsSpotEmpty && boardSpotStates[startX + 2][startY].IsSpotEmpty;
+                }
 
+               
+                if (!from.Piece.IsWhite && deltaX == -2)
+                {
+                    return boardSpotStates[startX - 1][startY].IsSpotEmpty && boardSpotStates[startX - 2][startY].IsSpotEmpty;
+                }
             }
 
+            if (deltaX == 1 && endY == startY /* && endX > startX*/ && endX < 8 && boardSpotStates[endX][startY].IsSpotEmpty && from.Piece.IsWhite)// Dowward white movement
+            {
+                return true;
+            }
 
-            return true;
+            if (deltaX == - 1 && endY == startY /*&& endX < startX */ && endX >= 0 && boardSpotStates[endX][startY].IsSpotEmpty && !from.Piece.IsWhite)// Upward black movement
+            {
+                return true;
+            }
+
+            //diagonal logic
+            if (!boardSpotStates[endX][endY].IsSpotEmpty && boardSpotStates[endX][endY].Piece.IsWhite != from.Piece.IsWhite)
+            {
+                if (from.Piece.IsWhite)
+                {
+                    if ( endX <= 7 && endY <= 7 && endX > startX/* && forward only check*/ && (Math.Abs(deltaX) == 1 && Math.Abs(deltaY) == 1)/*((deltaX== 1 && deltaY== + 1) || (deltaX == 1 && deltaY == - 1))*/)// Diagonal white movement  
+                        return true;
+                }
+                else if(!from.Piece.IsWhite) //
+                {
+                    if (endX >= 0 && endY >= 0 && endX < startX/*  forward only check*/ && (Math.Abs(deltaX) == 1 && Math.Abs(deltaY) == 1)/*((endX == startX - 1 && endY == startY - 1) || (endX == startX - 1 && endY == startY + 1))*/)// Diagonal black movement
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

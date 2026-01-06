@@ -1,0 +1,11 @@
+A pawn may move two squares forward if and only if:
+
+It has never moved before
+
+It moves straight forward
+
+It moves exactly two squares
+
+Both squares in front are empty
+
+It moves in the correct direction for its color

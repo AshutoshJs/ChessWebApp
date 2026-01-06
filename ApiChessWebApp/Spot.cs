@@ -10,5 +10,11 @@
         {
             this.Cordinates = c;
         }
+
+        public Spot(Cordinates c, Piece p)
+        {
+            this.Cordinates = c;
+            this.Piece = p;
+        }
     }
 }
