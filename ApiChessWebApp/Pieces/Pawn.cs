@@ -56,7 +56,7 @@ namespace ChessLogic
 
         //pawn logic should be color-agnostic so assuming White goes DOWN and Black moves UP
         //Note : Removed the position based coupling (eg.from.Cordinates.X == 1, from.Cordinates.X == 6) bcz. This works only if board orientation never changes.
-        public override bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotStates)
+        public override bool CanMove(Spot from, Spot to,List<List<Spot>> boardSpotStates)
         {
             List<Cordinates> spotsForKing = new List<Cordinates>();
             int startX = from.Cordinates.X;

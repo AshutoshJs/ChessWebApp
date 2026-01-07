@@ -22,7 +22,7 @@ namespace ChessLogic
         }
 
 
-        public override bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotStates)
+        public override bool CanMove(Spot from, Spot to, List<List<Spot>> boardSpotStates)
         {
             List<Cordinates> spotsForKnight = new List<Cordinates>();
             int startX = from.Cordinates.X;

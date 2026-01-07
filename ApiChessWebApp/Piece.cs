@@ -28,7 +28,7 @@ namespace ApiChessWebApp
             this.Color = c.ToString();
         }
 
-        public virtual bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotsState)
+        public virtual bool CanMove(Spot from, Spot to, List<List<Spot>> boardSpotsState)
         {
 
             return true;
