@@ -24,7 +24,7 @@ namespace ApiChessWebApp.Controllers
         [HttpGet(Name = "InitalizeGameold")]
         public IActionResult InitalizeGameOld()//public IEnumerable<Board> InitalizeGame()
         {
-            Board board = new Board("ee");
+            Board_Old board = new Board_Old("ee");
             return Ok(board);
 
         }
@@ -35,7 +35,8 @@ namespace ApiChessWebApp.Controllers
         {
             Player player1 = new Player(Colors.White, "Ayan");
             Player player2 = new Player(Colors.Black, "Payan");
-            Board2 board = new Board2(player1,player2);
+
+            Board board = new Board(player1,player2);
             
             var value = JsonSerializer.Serialize(board);
             ChessState chessState = new ChessState()
@@ -66,7 +67,7 @@ namespace ApiChessWebApp.Controllers
         public IActionResult MovePiece(MovePieceModel? request)
         {
             var boardState = _db.ChessState.First(x => x.Id == 1).GameState;
-            Board2 chessState = JsonSerializer.Deserialize<Board2>(boardState.ToString());
+            Board chessState = JsonSerializer.Deserialize<Board>(boardState.ToString());
 
 
             // get all spot list here from chess board state object 
@@ -76,18 +77,41 @@ namespace ApiChessWebApp.Controllers
             return Ok(boardState);
         }
 
-        [HttpPost(Name = "IsMovePossible")]
-        public IActionResult CanMove(MovePieceModel? request)
+        /// <summary>
+        /// To test piece move possibility
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost(Name = "CheckMove")]
+        public IActionResult CheckMove(/*MakeMoveRequest? request*/)
         {
             var boardState = _db.ChessState.First(x => x.Id == 1).GameState;
-            Board2 chessState = JsonSerializer.Deserialize<Board2>(boardState.ToString());
+            //List<List<Spot>> spots = JsonSerializer.Deserialize<List<List<Spot>>>(boardState);
+            ChessState spots = JsonSerializer.Deserialize<ChessState>(boardState);
 
+            //  List<List<Spot>> spots = JsonSerializer.Deserialize<List<List<Spot>>>(request.BoardCurrentSpotsState);
 
-            // get all spot list here from chess board state object 
-
-
-
-            return Ok(boardState);
+            // var from = spots.Select(x => x.Where(k => k.Equals(request.From))).FirstOrDefault().FirstOrDefault();
+            // var to = spots.Select(x => x.Where(k => k.Equals(request.To))).FirstOrDefault().FirstOrDefault();
+            //var isMovePossible = from.Piece.CanMove(from, to, spots);
+            //return Ok(isMovePossible);
+            return Ok();
         }
+
+        /// <summary>
+        /// On draggging one piece to another box this fucntion will do checking and moving thing
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost(Name = "MakeMove")]
+        public IActionResult MakeMove(MakeMoveRequest? request)
+        {
+            // will require who is player makeing the move 
+            List<List<Spot>> spots = JsonSerializer.Deserialize<List<List<Spot>>>(request.BoardCurrentSpotsState);
+            
+
+            return Ok();
+        }
+
     }
 }

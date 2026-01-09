@@ -27,13 +27,9 @@ namespace ApiChessWebApp
             this.IsWhite = ColorCode == Colors.White;
             this.Color = c.ToString();
         }
-
         public virtual bool CanMove(Spot from, Spot to, List<List<Spot>> boardSpotsState)
         {
-
             return true;
         }
-
-
     }
 }
