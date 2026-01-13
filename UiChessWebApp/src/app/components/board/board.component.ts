@@ -91,14 +91,30 @@ export class BoardComponent {
         }
       }
     }
-    // console.log('Mouseover called');
   }
-
+  GetPieceDetails(cellCordinate: String):any {
+    var splittedCellCordinates = cellCordinate.split('-');
+    console.log("cellCordinate", splittedCellCordinates)
+    var cell_X_Coridnate = splittedCellCordinates[1];
+    var cell_Y_Coridnate = splittedCellCordinates[2];
+    var cell_Z_Coridnate = splittedCellCordinates[3];
+    for (let i = 0; i < this.piecesDetails.length; i++) {
+      for (let j = 0; j < this.piecesDetails[i].length; j++) {
+        var temp = this.piecesDetails[i];
+        if (this.piecesDetails[i][j].cordinates.x == cell_X_Coridnate && this.piecesDetails[i][j].cordinates.y == cell_Y_Coridnate && this.piecesDetails[i][j].cordinates.z == cell_Z_Coridnate) {
+          console.log("data", this.piecesDetails[i][j])
+        }
+      }
+    }
+  }
   drop(event: CdkDragDrop<any>) {
     console.log("drop event data", event)
     console.log("drop event current container data", event.container.data)
     console.log("drop event previous container data", event.previousContainer.data)
-    console.log("this.piecesDetails",this.piecesDetails)
+ /*var fromPieceDetails =  this.GetPieceDetails(event.previousContainer.data);
+ var toPieceDetails =  this.GetPieceDetails(event.container.data);
+ console.log("fromPieceDetails",fromPieceDetails)
+    console.log("this.piecesDetails",this.piecesDetails)*/
     //this.chessService.canMove()
   }
 

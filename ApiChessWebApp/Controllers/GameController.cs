@@ -83,13 +83,11 @@ namespace ApiChessWebApp.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost(Name = "CheckMove")]
-        public IActionResult CheckMove(/*MakeMoveRequest? request*/)
+        public IActionResult CheckMove(MakeMoveRequest? request)
         {
             var boardState = _db.ChessState.First(x => x.Id == 1).GameState;
-            //List<List<Spot>> spots = JsonSerializer.Deserialize<List<List<Spot>>>(boardState);
-            ChessState spots = JsonSerializer.Deserialize<ChessState>(boardState);
-
-            //  List<List<Spot>> spots = JsonSerializer.Deserialize<List<List<Spot>>>(request.BoardCurrentSpotsState);
+            GameState spots = JsonSerializer.Deserialize<GameState>(boardState);
+           
 
             // var from = spots.Select(x => x.Where(k => k.Equals(request.From))).FirstOrDefault().FirstOrDefault();
             // var to = spots.Select(x => x.Where(k => k.Equals(request.To))).FirstOrDefault().FirstOrDefault();
