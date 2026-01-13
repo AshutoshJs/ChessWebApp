@@ -19,7 +19,7 @@ namespace ChessLogic
         {
             this.HtmlCode = c == Colors.White ? "&#9815" : "&#9821";
         }
-        public override bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotStates)
+        public override bool CanMove(Spot from, Spot to, List<List<Spot>> boardSpotStates)
         {
             List<Cordinates> spotsForKnight = new List<Cordinates>();
             decimal startX = from.Cordinates.X;

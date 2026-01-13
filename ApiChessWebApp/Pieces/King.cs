@@ -21,7 +21,7 @@ namespace ChessLogic.Pieces
             this.HtmlCode = c == Colors.White ? "&#9812" : "&#9818";
         }
 
-        public override bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotStates)
+        public override bool CanMove(Spot from, Spot to, List<List<Spot>> boardSpotStates)
         {
             List<Cordinates> spotsForKing = new List<Cordinates>();
             int startX = from.Cordinates.X;

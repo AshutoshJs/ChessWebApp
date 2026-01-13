@@ -20,7 +20,7 @@ namespace ApiChessWebApp.Pieces
             this.HtmlCode = c == Colors.White ? "&#9814" : "&#9820";
         }
 
-        public override bool CanMove(Spot from, Spot to,Piece piece, List<List<Spot>> boardSpotStates)
+        public override bool CanMove(Spot from, Spot to, List<List<Spot>> boardSpotStates)
         {
             int startX = from.Cordinates.X;
             int startY = from.Cordinates.Y;

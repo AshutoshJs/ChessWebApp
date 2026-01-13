@@ -20,7 +20,7 @@ namespace ChessLogic
             this.HtmlCode = c == Colors.White ? "&#9813" : "&#9819";
         }
 
-        public override bool CanMove(Spot from, Spot to, Piece piece, List<List<Spot>> boardSpotStates)
+        public override bool CanMove(Spot from, Spot to, List<List<Spot>> boardSpotStates)
         {
             /*List<Cordinates> spotsForKnight = new List<Cordinates>();
             decimal startX = from.Cordinates.X;
@@ -35,7 +35,7 @@ namespace ChessLogic
             Bishop bishop = new Bishop();
             Rook rook = new Rook();
 
-            if(bishop.CanMove(from, to, piece, boardSpotStates) || rook.CanMove(from, to, piece, boardSpotStates))
+            if(bishop.CanMove(from, to, boardSpotStates) || rook.CanMove(from, to, boardSpotStates))
             {
                 return true;
             }
