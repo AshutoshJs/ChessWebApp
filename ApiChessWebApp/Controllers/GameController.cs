@@ -87,11 +87,11 @@ namespace ApiChessWebApp.Controllers
         {
             var boardState = _db.ChessState.First(x => x.Id == 1).GameState;
             GameState spots = JsonSerializer.Deserialize<GameState>(boardState);
-           
 
-            // var from = spots.Select(x => x.Where(k => k.Equals(request.From))).FirstOrDefault().FirstOrDefault();
-            // var to = spots.Select(x => x.Where(k => k.Equals(request.To))).FirstOrDefault().FirstOrDefault();
-            //var isMovePossible = from.Piece.CanMove(from, to, spots);
+            var from = spots.Spots.Select(x => x.Where(k => k.Equals(request.From))).FirstOrDefault().FirstOrDefault();
+             var to = spots.Spots.Select(x => x.Where(k => k.Equals(request.To))).FirstOrDefault().FirstOrDefault();
+
+            var isMovePossible = from.Piece.CanMove(from, to, spots.Spots);
             //return Ok(isMovePossible);
             return Ok();
         }
