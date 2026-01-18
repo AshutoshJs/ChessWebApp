@@ -1,6 +1,6 @@
-﻿namespace ApiChessWebApp.Models
+﻿namespace ApiChessWebApp.DbDTos
 {
-    public class ChessState
+    public class ChessStateDbDto
     {
         /*
            Id int AUTO_INCREMENT PRIMARY KEY,
@@ -9,7 +9,7 @@
            CreatedData datetime,
            UpdatedData datetime
         */
-        public int? Id{ get; set; }
+        public int Id{ get; set; }
         public string GameState { get; set; }
         public string? UniqueKey { get; set; }
     }

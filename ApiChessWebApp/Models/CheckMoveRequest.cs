@@ -1,6 +1,6 @@
 ﻿namespace ApiChessWebApp.Models
 {
-    public class MakeMoveRequest
+    public class CheckMoveRequest
     {
         //public Spot From { get; set; }
         //public Spot To { get; set; }
