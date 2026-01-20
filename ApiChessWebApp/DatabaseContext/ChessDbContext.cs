@@ -64,7 +64,7 @@ namespace ApiChessWebApp.DatabaseContext
             {
                 entity.ToTable("GameState");
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                //entity.Property(e => e.Id).ValueGeneratedOnAdd();
                 entity.Property(e => e.ChessStateId);
                 entity.Property(e => e.FirstPlayerId);
                 entity.Property(e => e.SecondPlayerId);

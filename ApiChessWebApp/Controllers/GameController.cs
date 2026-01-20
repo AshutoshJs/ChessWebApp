@@ -150,23 +150,50 @@ namespace ApiChessWebApp.Controllers
         [HttpPost(Name = "MakeMove")]
         public IActionResult MakeMove(MakeMoveViewModel? request)
         {
-            // will require who is player makeing the move 
-            List<List<Spot>> spots = JsonSerializer.Deserialize<List<List<Spot>>>(request.BoardCurrentSpotsState);
+            // will require who is player makeing the move \
+            var gameState = _db.GameStateDbDto.Where(x => x.Id == request.GameId).First();
+            var boardState = _db.ChessState.Where(x => x.Id == gameState.ChessStateId).First();
+            // List<List<Spot>> spots = JsonSerializer.Deserialize<List<List<Spot>>>(request.BoardCurrentSpotsState);
 
-            Board board = new Board(request.Player1, request.Player2);
+            //List<List<Spot>> spots = JsonSerializer.Deserialize<List<List<Spot>>>(boardState.GameState);
+            GameState spots = JsonSerializer.Deserialize<GameState>(boardState.GameState);
 
+            
+            var from = spots.Spots.SelectMany(row => row).FirstOrDefault(s => s.Cordinates.Equals(request.From));
+            var to = spots.Spots.SelectMany(row => row).FirstOrDefault(s => s.Cordinates.Equals(request.To));
+            
+            var player1 = _db.Player.Where(x => x.Id == gameState.FirstPlayerId).First();
+            var player2 = _db.Player.Where(x => x.Id == gameState.SecondPlayerId).First();
+            var chessStateId = gameState.ChessStateId;
+            Board newBoard;
+            if (player1.IsMyTurn)
+            {
+                newBoard= player1.MakeMove(from,to, spots.Spots);
+                player1.IsMyTurn = false;
+                player2.IsMyTurn = true;
+            }
+            else
+            {
+                newBoard= player2.MakeMove(from, to, spots.Spots);
+                player1.IsMyTurn = true;
+                player2.IsMyTurn = false;
+            }
+            
+              // Board board = new Board(request.Player1, request.Player2);
+            
 
-            var value = JsonSerializer.Serialize(board);
+            var value = JsonSerializer.Serialize(newBoard);
             ChessStateDbDto chessState = new ChessStateDbDto()
             {
                 GameState = value
 
             };
 
-            var game = _db.ChessState.FirstOrDefault(x => x.Id == 1);
+            var game = _db.ChessState.FirstOrDefault(x => x.Id == request.GameId);
             game.GameState = value;
 
-
+            _db.ChessState.Add(chessState);
+            _db.SaveChanges();
             return Ok();
         }
 
