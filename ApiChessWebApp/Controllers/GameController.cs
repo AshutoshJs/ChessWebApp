@@ -64,8 +64,8 @@ namespace ApiChessWebApp.Controllers
             var chessStateID = chessState.Id;
             player1.ChessStateId = chessStateID;
             player1.ChessStateId = chessStateID;
-            var p1 = _db.Player.Add(player1);
-            var p2 = _db.Player.Add(player2);
+            var p1 = _db.Player.Add(new PlayerDbDto(player1));
+            var p2 = _db.Player.Add(new PlayerDbDto(player2));
             _db.SaveChanges();
             var p1Id = player1.Id;
             var p2Id = player2.Id;
@@ -162,8 +162,8 @@ namespace ApiChessWebApp.Controllers
             var from = spots.Spots.SelectMany(row => row).FirstOrDefault(s => s.Cordinates.Equals(request.From));
             var to = spots.Spots.SelectMany(row => row).FirstOrDefault(s => s.Cordinates.Equals(request.To));
             
-            var player1 = _db.Player.Where(x => x.Id == gameState.FirstPlayerId).First();
-            var player2 = _db.Player.Where(x => x.Id == gameState.SecondPlayerId).First();
+            var player1 = new Player(_db.Player.Where(x => x.Id == gameState.FirstPlayerId).First());
+            var player2 = new Player(_db.Player.Where(x => x.Id == gameState.SecondPlayerId).First());
             var chessStateId = gameState.ChessStateId;
             Board newBoard;
             if (player1.IsMyTurn)
@@ -172,17 +172,21 @@ namespace ApiChessWebApp.Controllers
                 player1.IsMyTurn = false;
                 player2.IsMyTurn = true;
             }
-            else
+            else if(player2.IsMyTurn)
             {
                 newBoard= player2.MakeMove(from, to, spots.Spots);
                 player1.IsMyTurn = true;
                 player2.IsMyTurn = false;
             }
-            
-              // Board board = new Board(request.Player1, request.Player2);
-            
+            else
+            {
+                return BadRequest("no turn found");
+            }
 
-            var value = JsonSerializer.Serialize(newBoard);
+                // Board board = new Board(request.Player1, request.Player2);
+
+
+                var value = JsonSerializer.Serialize(newBoard);
             ChessStateDbDto chessState = new ChessStateDbDto()
             {
                 GameState = value

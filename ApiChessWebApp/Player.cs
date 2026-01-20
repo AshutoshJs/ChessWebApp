@@ -1,4 +1,6 @@
-﻿namespace ApiChessWebApp
+﻿using ApiChessWebApp.DbDTos;
+
+namespace ApiChessWebApp
 {
     public class Player
     {
@@ -23,6 +25,18 @@
             this.Name = name;
             this.IsWhite = color == Colors.White;
             this.IsMyTurn = IsMyTurn;
+            
+        }
+
+        public Player(PlayerDbDto data)
+        {
+            this.Color = Enum.TryParse<Colors>(data.Color, true, out Colors result) ? result : Colors.White; //data.Color
+            this.Name = data.Name;
+            this.IsWhite = data.Color == Colors.White.ToString();
+            this.IsMyTurn = data.IsMyTurn;
+            this.TotalMovesCount = data.TotalMovesCount;
+            this.ChessStateId = data.ChessStateId;
+            this.IsWinner = data.IsWinner;
         }
 
         public Board MakeMove(Spot from, Spot to, List<List<Spot>> boardSpots)

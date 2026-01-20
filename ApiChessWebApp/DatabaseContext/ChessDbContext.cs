@@ -8,7 +8,7 @@ namespace ApiChessWebApp.DatabaseContext
     public class ChessDbContext : DbContext
     {
         public DbSet<ChessStateDbDto> ChessState { get; set; }
-        public DbSet<Player> Player { get; set; }
+        public DbSet<PlayerDbDto> Player { get; set; }
 
         public DbSet<GameStateDbDto> GameStateDbDto { get; set; }
         public ChessDbContext(DbContextOptions<ChessDbContext> options): base(options)
@@ -46,7 +46,7 @@ namespace ApiChessWebApp.DatabaseContext
                     .HasDefaultValueSql("UUID()");
             });
 
-            modelBuilder.Entity<Player>(entity =>
+            modelBuilder.Entity<PlayerDbDto>(entity =>
             {
                 entity.ToTable("Players");
                 entity.HasKey(e => e.Id);
