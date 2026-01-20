@@ -49,6 +49,7 @@ namespace ApiChessWebApp
             Spots[7][7].Piece = new Rook(7, 7, 'h');
         }
 
+        //Used to initialize the board 
         public Board(Player a, Player b)
         {
             for (int i = 0; i < 8; i++)
