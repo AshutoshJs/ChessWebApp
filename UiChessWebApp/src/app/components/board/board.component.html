@@ -7,19 +7,19 @@
 </head>
 <body>
    <div cdkDropListGroup class="chessboard">
-<div *ngFor="let spotss of spots">
-  <div
+<div *ngFor="let spotss of spots" style="height: 10px;">
+  <div style="border: 2px solid rgb(59, 229, 17) ;"
     *ngFor="let cell of spotss"
     cdkDropList
     [cdkDropListData]="cell"
     (cdkDropListDropped)="drop($event)"
   >
-    <span
+    <span style="border: 2px solid blue ;"
       *ngIf="cell.piece"
       cdkDrag
       [cdkDragData]="cell"
     >
-      'a'<!-- {{ cell.piece.htmlCode }} -->
+     {{ cell.piece.htmlCode }} 
     </span>
   </div>
 </div>

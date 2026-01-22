@@ -41,7 +41,8 @@ export class BoardComponent {
       next: (res: any) => {
         this.piecesDetails = res.spots;
         console.log("--->", res.spots)
-        this.spots  = JSON.parse(JSON.stringify(res));
+        this.spots  = res.spots//JSON.parse(JSON.stringify(res));
+        
          console.log("22--->", this.spots)
         this.bindPiceWithHtmlDiv(this.piecesDetails);
       }
