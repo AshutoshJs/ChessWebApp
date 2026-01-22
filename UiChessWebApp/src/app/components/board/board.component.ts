@@ -6,6 +6,7 @@ import { CdkDrag, CdkDragDrop, CdkDropList, DragDrop } from '@angular/cdk/drag-d
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { transferArrayItem } from '@angular/cdk/drag-drop';
+import { Spot } from '../../Helper/classes/Spot';
 @Component({
   selector: 'app-board',
   imports: [CommonModule, CdkDrag, CdkDropList],
@@ -19,7 +20,7 @@ export class BoardComponent {
   startingPiecesDetails: Piece[] = [];
   piecesDetails: any;
   isActive: boolean = true;
-
+ spots: Spot [][]=[]; 
   constructor(chessService: ChessapiserviceService) {
     this.chessService = chessService;
     this.chessService.getData();
@@ -40,6 +41,8 @@ export class BoardComponent {
       next: (res: any) => {
         this.piecesDetails = res.spots;
         console.log("--->", res.spots)
+        this.spots  = JSON.parse(JSON.stringify(res));
+         console.log("22--->", this.spots)
         this.bindPiceWithHtmlDiv(this.piecesDetails);
       }
     })
@@ -119,7 +122,6 @@ export class BoardComponent {
   }
 
   onDragStart(event: any) {
-    console.log("drag event 2", event)
   }
   /*
   Correct Mental Model for Chess ♟️
