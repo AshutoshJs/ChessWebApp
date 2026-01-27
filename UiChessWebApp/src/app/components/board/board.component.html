@@ -1,28 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-   <div cdkDropListGroup class="chessboard">
-<div *ngFor="let spotss of spots" style="height: 10px;">
-  <div style="border: 2px solid rgb(59, 229, 17) ;"
-    *ngFor="let cell of spotss"
-    cdkDropList
-    [cdkDropListData]="cell"
-    (cdkDropListDropped)="drop($event)"
-  >
-    <span style="border: 2px solid blue ;"
-      *ngIf="cell.piece"
-      cdkDrag
-      [cdkDragData]="cell"
+<div cdkDropListGroup class="chessboard">
+  <ng-container *ngFor="let row of spots">
+    <div
+      *ngFor="let cell of row"
+      cdkDropList
+      [cdkDropListData]="cell"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListEnterPredicate]="canEnter"
+      [ngClass]="(cell.cordinates.x + cell.cordinates.y) % 2 === 0 ? 'a' : 'b'"
     >
-     {{ cell.piece.htmlCode }} 
-    </span>
-  </div>
+      <span
+        *ngIf="cell.piece"
+        cdkDrag
+        [cdkDragData]="cell.cordinates"
+        [innerHTML]="cell.piece.htmlCode"
+        class="piece"
+      ></span>
+    </div>
+  </ng-container>
 </div>
-</div>
-</body>
-</html>

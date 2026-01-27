@@ -1,36 +1,48 @@
+.chessboard {
+  display: grid;
+  grid-template-columns: repeat(8, 60px);
+  grid-template-rows: repeat(8, 60px);
+}
 
+[cdkDropList] {
+  width: 60px;
+  height: 60px;
+}
 .cdk-drag-preview {
-  font-size: 42px;
+  font-size: 32px;   /* match your chess piece */
+  pointer-events: none;
+}
+span[cdkDrag] {
+  font-size: 32px;
+  cursor: grab;
 }
 
-.body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.cdk-drag-placeholder {
+  opacity: 0;
 }
-.chessboard{
-    border: 2px solid black;
-    display: flex;
-    width: 80%;
-    height: 640px;
-    flex-wrap: wrap;
 
+
+.chessboard > div {
+  display: contents; /* allows nested ngFor rows */
 }
-.chessboard div{
-    width: 10%;//bcz widht is 80 =>80/10=8
-    height: 80px;//bcz 560/70 is 8
-    width: calc(100%/8);
-    height: calc(560/70);
-    align-items: center;
-    font-size: 50px;
-    font-weight: bold;
-    text-align: center;
-    text-shadow: 5px 1px white;
+
+.chessboard div[cdkDropList] {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
 }
-.a{
- //width: ;
- background-color: rgb(182, 236, 203);
+
+.a {
+  background-color: #f0d9b5;
 }
-.b{
-background-color: rgb(12, 142, 62);
+
+.b {
+  background-color: #b58863;
+}
+
+.piece {
+  cursor: grab;
 }
