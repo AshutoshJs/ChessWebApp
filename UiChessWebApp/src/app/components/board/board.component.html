@@ -5,7 +5,7 @@
       cdkDropList
       [cdkDropListData]="cell"
       (cdkDropListDropped)="drop($event)"
-      [cdkDropListEnterPredicate]="canEnter"
+      
       [ngClass]="(cell.cordinates.x + cell.cordinates.y) % 2 === 0 ? 'a' : 'b'"
     >
       <span

@@ -112,23 +112,16 @@ export class BoardComponent {
     }
   }
   drop(event: CdkDragDrop<any>) {
-  const fromCoords = event.item.data;       // coordinates only
-  const toCell     = event.container.data;  // full cell
-
-  console.log('FROM:', fromCoords);
-  console.log('TO:', toCell.cordinates);
-
-  if (
-    fromCoords.x === toCell.cordinates.x &&
-    fromCoords.y === toCell.cordinates.y
-  ) {
-    console.log('Dropped on same square');
-    return;
+    console.log("drop event data", event)
+   // console.log("drop event current container data", event.item.data)
+   // console.log("drop event previous container data", event.container.data)
+ /*var fromPieceDetails =  this.GetPieceDetails(event.previousContainer.data);
+ var toPieceDetails =  this.GetPieceDetails(event.container.data);
+ console.log("fromPieceDetails",fromPieceDetails)
+    console.log("this.piecesDetails",this.piecesDetails)*/
+    //this.chessService.canMove()
   }
 
-  // chess move logic here
-}
-canEnter = () => true;
   onDragStart(event: any) {
   }
   /*
