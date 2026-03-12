@@ -111,8 +111,14 @@ export class BoardComponent {
       }
     }
   }
+  k:any=1;
+  t:any=2;
+  connectedDropLists = this.spots.flatMap(row => row.map(cell => `cell-${cell.cordinates.x}-${cell.cordinates.y}`));
+
   drop(event: CdkDragDrop<any>) {
-    console.log("drop event data", event)
+   console.log("Previous container data:", event.previousContainer.data);
+console.log("Current container data:", event.container.data);
+console.log("Dragged item data:", event);
    // console.log("drop event current container data", event.item.data)
    // console.log("drop event previous container data", event.container.data)
  /*var fromPieceDetails =  this.GetPieceDetails(event.previousContainer.data);
@@ -134,3 +140,108 @@ From / To	previousContainer → container
   */
 
 }
+/*
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ChessapiserviceService } from '../../Services/chessapiservice.service';
+import { Piece } from '../../Helper/classes/Piece'
+import { CdkDrag, CdkDragDrop, CdkDropList, DragDrop } from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
+import { transferArrayItem } from '@angular/cdk/drag-drop';
+import { Spot } from '../../Helper/classes/Spot';
+
+@Component({
+  selector: 'app-board',
+  imports: [CommonModule, CdkDrag, CdkDropList],
+  templateUrl: './board.component.html',
+  styleUrl: './board.component.scss'
+})
+export class BoardComponent implements OnInit {
+  chessService: ChessapiserviceService;
+  startingPiecesDetails: Piece[] = [];
+  piecesDetails: any;
+  isActive: boolean = true;
+  spots: Spot[][] = [];
+  connectedDropLists: string[] = [];
+
+  constructor(chessService: ChessapiserviceService) {
+    this.chessService = chessService;
+  }
+
+  ngOnInit() {
+    this.initializeBoard();
+  }
+
+  initializeBoard() {
+    this.chessService.getData().subscribe({
+      next: (res: any) => {
+        this.spots = res.spots;
+        console.log("Spots loaded:", this.spots);
+        
+        // Initialize connected drop lists AFTER spots are loaded
+        this.updateConnectedDropLists();
+      },
+      error: (err) => {
+        console.error("Error loading board:", err);
+      }
+    })
+  }
+
+  // Update connected drop lists based on current spots
+  updateConnectedDropLists() {
+    this.connectedDropLists = this.spots.flatMap(row => 
+      row.map(cell => `cell-${cell.cordinates.x}-${cell.cordinates.y}-${cell.cordinates.z}`)
+    );
+    console.log("Connected drop lists:", this.connectedDropLists);
+  }
+
+  drop(event: CdkDragDrop<any>) {
+    console.log("DROP EVENT FIRED");
+    console.log("Previous container ID:", event.previousContainer.id);
+    console.log("Current container ID:", event.container.id);
+    console.log("Previous container data:", event.previousContainer.data);
+    console.log("Current container data:", event.container.data);
+    
+    // Get the dragged piece data
+    const draggedData = event.item.data;
+    
+    // Only proceed if we're moving to a different cell
+    if (event.previousContainer.id !== event.container.id) {
+      // Get coordinates
+      const fromCell = event.previousContainer.data;
+      const toCell = event.container.data;
+      
+      console.log(`Moving piece from (${fromCell.cordinates.x},${fromCell.cordinates.y}) to (${toCell.cordinates.x},${toCell.cordinates.y})`);
+      
+      // Update the board data structure
+      // Move the piece from source to destination
+      toCell.piece = fromCell.piece;
+      fromCell.piece = null;
+      
+      // Force Angular to detect changes
+      this.spots = [...this.spots];
+      
+      // Optional: Call service to validate move
+      // this.chessService.validateMove(fromCell, toCell);
+    } else {
+      console.log("Same container - no move needed");
+    }
+  }
+
+  // Helper method to get cell by coordinates
+  getCellByCoordinates(x: number, y: number, z: string): Spot | null {
+    for (const row of this.spots) {
+      for (const cell of row) {
+        if (cell.cordinates.x === x && 
+            cell.cordinates.y === y && 
+            cell.cordinates.z === z) {
+          return cell;
+        }
+      }
+    }
+    return null;
+  }
+}
+
+*/

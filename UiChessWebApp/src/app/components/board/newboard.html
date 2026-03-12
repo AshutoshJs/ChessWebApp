@@ -1,8 +1,9 @@
 <div cdkDropListGroup class="chessboard">
-  <ng-container *ngFor="let row of spots; let i = index">
+  <ng-container *ngFor="let row of spots">
     <div
-      *ngFor="let cell of row; let j = index"
-      [id]="'cell-' + cell.cordinates.x + '-' + cell.cordinates.y + '-' + cell.cordinates.z"
+      *ngFor="let cell of row"
+
+      id="cell-0-0-a"
       cdkDropList
       [cdkDropListData]="cell"
       (cdkDropListDropped)="drop($event)"
